@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="mbt.css" type="text/css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나의 MBTI</title>
+<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+</head>
+<body>
+	<div id="bg"></div>
+	<div id="outer">
+		<header>
+			
+		</header>
+		<div id="procBar_container">
+			<div id="procBar"></div>
+		</div>
+		<div class="slide_wrap">
+			<div class="slide_list clearfix">
+				<div class="slide_content">
+					<div id="detail"></div>
+					<div class="answer" style="margin-top: 50px;">
+						<button onclick="sendLinkCustom(tid)" style="width: 150px; height: 60px;">카카오톡<br> 공유하기</button>
+						<button onclick="location.href='index.html'" style="width: 150px; height: 60px;">다시하기</button>
+					</div>
+				
+				</div>
+				
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const slideList = document.querySelector('.slide_list');
+		const slideContents = document.querySelectorAll('.slide_content');
+		const btn = document.querySelector('.btn');
+		const slideLen = slideContents.length;
+		const slideWidth = 360;
+		const slideSpeed = 300;
+		slideList.style.width = slideWidth * (slideLen) + "px";
+		const procBar = document.querySelector('#procBar');
+		const procBarContainer = document.querySelector('#procBar_container');
+		let index = 1;
+
+		const PROC = 400 / (slideLen - 1);
+		let procWidth = PROC;
+		const resultMsg = document.querySelector('#result');
+
+		let ei = localStorage.getItem('ei');
+		let sn = localStorage.getItem('sn');
+		let tf = localStorage.getItem('tf');
+		let jp = localStorage.getItem('jp');
+		let type = "";
+		let tid;
+		let detail = document.getElementById('detail');
+
+		if(ei>0&&sn>0&&tf>0&&jp>0){
+			type="estj";
+			tid=43060;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p=document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(6).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ESTJ형의 특징은 다음과 같습니다.";
+			detail.append(p);
+
+			li0.innerText="호불호가 확실하다.";
+			detail.append(li0);
+			li1.innerText="집단에서 분위기보다는 목적 의식을 중요시한다.";
+			detail.append(li1);
+			li2.innerText="리더 역할을 딱히 선호하지는 않으나 막상 맡으면 잘한다.";
+			detail.append(li2);
+			li3.innerText="예약과 계획을 생활화한다.";
+			detail.append(li3);
+			li4.innerText="싸움을 싫어하지만 싸워서 지는 것도 싫어한다.";
+			detail.append(li4);
+			li5.innerText="감동시키기보다는 이해시키기를 원한다.";
+			detail.append(li5);
+			li6.innerText="외로움을 별로 타지 않는다.";
+			detail.append(li6);							
+			
+		}else if(ei>0&&sn>0&&tf>0&&jp<0){
+			type="estp";
+			tid=43061;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(7).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ESTP형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="자신감이 항상 철철 넘친다.";
+			detail.append(li0);
+			li1.innerText="자극적인 것을 좋아한다.";
+			detail.append(li1);
+			li2.innerText="성취욕이 강하다.";
+			detail.append(li2);
+			li3.innerText="새로운 것에 대한 도전 욕구가 강하다.";
+			detail.append(li3);
+			li4.innerText="타인에게 선입견이 별로 없고 개방적이다.";
+			detail.append(li4);
+			li5.innerText="한 가지에 집중하는 것은 지겹다.";
+			detail.append(li5);
+			li6.innerText="일을 마지막에 폭발적으로 한다.";
+			detail.append(li6);	
+		}else if(ei>0&&sn>0&&tf<0&&jp>0){
+			type="esfj";
+			tid=43058;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(4).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ESfj형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="기본적으로 친절하다.";
+			detail.append(li0);
+			li1.innerText="긍정적이고 낙천적인 편이다.";
+			detail.append(li1);
+			li2.innerText="스트레스를 받으면 누군가를 만나야 한다.";
+			detail.append(li2);
+			li3.innerText="새로운 것에 대한 도전 욕구가 강하다.";
+			detail.append(li3);
+			li4.innerText="한 번 생활습관이나 버릇을 들이면 바꾸거나 고치기가 쉽지 않다.";
+			detail.append(li4);
+			li5.innerText="아무 생각 없이 멍 때리기를 잘한다.";
+			detail.append(li5);
+			li6.innerText="예의 없는 사람, 남들 무시하는 사람을 굉장히 싫어한다.";
+			detail.append(li6);	
+		}else if(ei>0&&sn>0&&tf<0&&jp<0){
+			type="esfp";
+			tid=43059;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(5).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ESFP형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="개성적인 매력이 있는 편이다.";
+			detail.append(li0);
+			li1.innerText="모든 MBTI 유형 중 평균적인 행복도가 ESFJ와 함께 가장 높다.";
+			detail.append(li1);
+			li2.innerText="답장이 빠르거나 느리다.";
+			detail.append(li2);
+			li3.innerText="조직생활보다는 자유로울 때 능력을 발휘한다.";
+			detail.append(li3);
+			li4.innerText="하고 싶은 말은 많은데 정작 하고 싶은 말은 못한다.";
+			detail.append(li4);
+			li5.innerText="혼자 있는 것을 힘들어한다.";
+			detail.append(li5);
+			li6.innerText="내일은 내일의 태양이 뜬다.";
+			detail.append(li6);
+		}else if(ei>0&&sn<0&&tf>0&&jp>0){
+			type="entj";
+			tid=43056;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(2).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ENTJ형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="지적 욕구가 강하다.";
+			detail.append(li0);
+			li1.innerText="너무 완벽을 추구하기 때문에 남이 비집고 들어갈 틈이 없다.";
+			detail.append(li1);
+			li2.innerText="변화 있는 생활을 즐긴다.";
+			detail.append(li2);
+			li3.innerText="거시적 안목으로 일을 추진해 나간다.";
+			detail.append(li3);
+			li4.innerText="효율을 중요시한다.";
+			detail.append(li4);
+			li5.innerText="세상에 믿을 사람은 오직 나 하나라고 생각한다.";
+			detail.append(li5);
+			li6.innerText="솔직하고 결단력, 통솔력이 있다";
+			detail.append(li6);	
+		}else if(ei>0&&sn<0&&tf>0&&jp<0){
+			type="entp";
+			tid=43057;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(3).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ENTP형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="대개 팔방미인, 다재다능이다.";
+			detail.append(li0);
+			li1.innerText="자존감이 높고 자신에 대한 확신이 강하다.";
+			detail.append(li1);
+			li2.innerText="처음 보는 사람에게 말 거는 데 거리낌이 없다.";
+			detail.append(li2);
+			li3.innerText="주관과 가치관이 매우 뚜렷하다.";
+			detail.append(li3);
+			li4.innerText="대개 겉과 속이 같은 사람들이다.";
+			detail.append(li4);
+			li5.innerText="자신만의 세계가 뚜렷하다.";
+			detail.append(li5);
+			li6.innerText="같은 이야기를 또 듣는 것을 극도로 싫어한다.";
+			detail.append(li6);			
+		}else if(ei>0&&sn<0&&tf<0&&jp>0){
+			type="enfj";
+			tid=43054;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(16).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ENFJ형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="적극적이고 추진력이 강하다.";
+			detail.append(li0);
+			li1.innerText="사람을 좋아하고 남에게 잘 맞춘다.";
+			detail.append(li1);
+			li2.innerText="신나고 재미있는 성격이다.";
+			detail.append(li2);
+			li3.innerText="화가 나면 겉으로 표현하지 않는다";
+			detail.append(li3);
+			li4.innerText="상처를 매우 잘 받고,오랜 시간 가슴 아파한다.";
+			detail.append(li4);
+			li5.innerText="현실보다는 더 나은 삶 이상을 추구한다.";
+			detail.append(li5);
+			li6.innerText="임기응변이 능하다.";
+			detail.append(li6);	
+		}else if(ei>0&&sn<0&&tf<0&&jp<0){
+			type="enfp";
+			tid=43055;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(1).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ENFP형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="정이 많은 유형이다.";
+			detail.append(li0);
+			li1.innerText="새로운 사람 만나기를 좋아한다.";
+			detail.append(li1);
+			li2.innerText="위기 대처능력이 뛰어나다.";
+			detail.append(li2);
+			li3.innerText="감수성이 풍부하고, 눈물이 많다.";
+			detail.append(li3);
+			li4.innerText="유연하고 진보적인 사고를 가졌다.";
+			detail.append(li4);
+			li5.innerText="몽상가 혹은 공상가라고 불리기도 한다.";
+			detail.append(li5);
+			li6.innerText="내면에 열정을 지녔다.";
+			detail.append(li6);	
+		}else if(ei<0&&sn>0&&tf>0&&jp>0){
+			type="istj";
+			tid=43068;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(14).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ISTJ형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="주어진 업무나 책임을 끝까지 완수한다.";
+			detail.append(li0);
+			li1.innerText="조용하고 과묵한 편이다.";
+			detail.append(li1);
+			li2.innerText="지나고 난 다음에 따지는 편이다.";
+			detail.append(li2);
+			li3.innerText="원리, 원칙적이다.";
+			detail.append(li3);
+			li4.innerText="교통체증을 미리 계산해서 약속 시간을 지킨다.";
+			detail.append(li4);
+			li5.innerText="남들이 속을 모른다고 말한다.";
+			detail.append(li5);
+			li6.innerText="참고 참았다가 확 터뜨리는 편이다.";
+			detail.append(li6);
+		}else if(ei<0&&sn>0&&tf>0&&jp<0){
+			type="istp";
+			tid=43069;
+
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(15).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ISTP형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="어떤 일이든 노력에 비해 효율이 높다.";
+			detail.append(li0);
+			li1.innerText="시험에 벼락치기로 일관하는 경향이 있다.";
+			detail.append(li1);
+			li2.innerText="냉철한 판단을 매우 잘 한다.";
+			detail.append(li2);
+			li3.innerText="대인관계가 원만하지만 공사의 구별이 뚜렷하다.";
+			detail.append(li3);
+			li4.innerText="평소에 자기 사람들 빼고는 남에게 관심이 없다.";
+			detail.append(li4);
+			li5.innerText="친해지면 반전 매력이 있는 스타일이다.";
+			detail.append(li5);
+			li6.innerText="오는 사람 안 막고 가는 사람 안 잡는다.";
+			detail.append(li6);
+		}else if(ei<0&&sn>0&&tf<0&&jp>0){
+			type="isfj";
+			tid=43066;
+			
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(12).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ISFJ형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="눈치가 상당히 빠르다.";
+			detail.append(li0);
+			li1.innerText="끈기 있고 성실하며 안정감이 있다.";
+			detail.append(li1);
+			li2.innerText="본인의 고민이나 이야기를 잘 하지 않는다.";
+			detail.append(li2);
+			li3.innerText="약속을 매우 중요하게 여긴다.";
+			detail.append(li3);
+			li4.innerText="돈, 시간, 감정 등의 쓸모없는 낭비를 싫어한다.";
+			detail.append(li4);
+			li5.innerText="주목 공포증, 발표 공포증이 있는 경우가 많다.";
+			detail.append(li5);
+			li6.innerText="기본적으로 정이 많지만 남용하지는 않는다.";
+			detail.append(li6);			
+		}else if(ei<0&&sn>0&&tf<0&&jp<0){
+			type="isfp";
+			tid=43067;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(13).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>ISFP형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="마음이 순하고 따뜻하며 정이 많다.";
+			detail.append(li0);
+			li1.innerText="규칙 또는 틀에 묶이는 것을 싫어한다.";
+			detail.append(li1);
+			li2.innerText="인터넷에 자신의 정보를 노출하기 꺼려한다.";
+			detail.append(li2);
+			li3.innerText="특유의 유머 감각이 있기도 하다.";
+			detail.append(li3);
+			li4.innerText="조직에서 시간이 오래 지나야 인정을 받는다.";
+			detail.append(li4);
+			li5.innerText="딱딱하고 사무적인 사람을 정말 싫어한다.";
+			detail.append(li5);
+			li6.innerText="즐기는 것에 대한 호기심이 많다.";
+			detail.append(li6);		
+		}else if(ei<0&&sn<0&&tf>0&&jp>0){
+			type="intj";
+			tid=43064;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(10).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>INTJ형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="논리적이고 객관적이다.";
+			detail.append(li0);
+			li1.innerText="합리적이며 공정성을 중시한다.";
+			detail.append(li1);
+			li2.innerText="자신만의 기준이 높아 칭찬을 잘 하지 않는다.";
+			detail.append(li2);
+			li3.innerText="최악의 상황이 와도 끝내 해결책을 찾아낸다.";
+			detail.append(li3);
+			li4.innerText="사랑보다는 우정 관계에서 성공하기 쉽다.";
+			detail.append(li4);
+			li5.innerText="인간에 대한 기대치는 바닥부터 시작된다.";
+			detail.append(li5);
+			li6.innerText="합리적이지 못한 사회 관행을 멍청한 것으로 본다.";
+			detail.append(li6);		
+		}else if(ei<0&&sn<0&&tf>0&&jp<0){
+			type="intp";
+			tid=43065;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(11).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>INTP형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="지적인 면이 매우 뚜렷하게 드러나는 성격이다.";
+			detail.append(li0);
+			li1.innerText="혼자만의 시간을 매우 중요시한다.";
+			detail.append(li1);
+			li2.innerText="비논리적이고 불합리한 것에 강하게 반항한다.";
+			detail.append(li2);
+			li3.innerText="정서 표현이 별로 없어 친해지기 전에는 잘 이해하기 어렵다.";
+			detail.append(li3);
+			li4.innerText="통제형보다는 즉흥형이다.";
+			detail.append(li4);
+			li5.innerText="사생활에 매우 민감하다.";
+			detail.append(li5);
+			li6.innerText="방해받지 않고 혼자 조용하게 일하고 싶어한다.";
+			detail.append(li6);
+		}else if(ei<0&&sn<0&&tf<0&&jp>0){
+			type="infj";
+			tid=43062;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(8).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>INFJ형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="인내심이 많고 배려가 몸에 배어 있다.";
+			detail.append(li0);
+			li1.innerText="분쟁과 다툼을 싫어하여 피하고자 한다.";
+			detail.append(li1);
+			li2.innerText="이상주의적, 완벽주의적 성향을 가지고 있다.";
+			detail.append(li2);
+			li3.innerText="현실의 유행에 큰 관심이 없다.";
+			detail.append(li3);
+			li4.innerText="남에게 민폐 끼치는 것을 몹시 싫어한다.";
+			detail.append(li4);
+			li5.innerText="외로움을 잘 타고, 또 고독을 즐긴다.";
+			detail.append(li5);
+			li6.innerText="외유내강인 사람들이 많다.";
+			detail.append(li6);
+		}else if(ei<0&&sn<0&&tf<0&&jp<0){
+			type="infp";
+			tid=43063;
+			let img = document.createElement('img');
+			let li0 = document.createElement('li');
+			let li1 = document.createElement('li');
+			let li2 = document.createElement('li');
+			let li3 = document.createElement('li');
+			let li4 = document.createElement('li');
+			let li5 = document.createElement('li');
+			let li6 = document.createElement('li');
+			let p = document.createElement('p');
+
+			img.setAttribute('src',"img/MBTI(9).png");
+			img.setAttribute('width',"300px");
+			detail.append(img);
+
+			p.innerHTML="<b>INFP형의 특징은 다음과 같습니다.";
+			detail.append(p);
+			li0.innerText="성격이 세심하고 디테일하다.";
+			detail.append(li0);
+			li1.innerText="감정의 기복이 매우 심하다.";
+			detail.append(li1);
+			li2.innerText="경우에 따라 마음속으로 쉽게 소외감을 잘 느낀다.";
+			detail.append(li2);
+			li3.innerText="실제 사람보다 책 또는 영화 속 인물에 매료되곤 한다.";
+			detail.append(li3);
+			li4.innerText="사생활 영역을 침해당하는 것을 극도로 싫어한다.";
+			detail.append(li4);
+			li5.innerText="너무 이상주의적이고 주관적이어서 자기객관화가 잘 안 되는 편이다.";
+			detail.append(li5);
+			li6.innerText="규칙을 몸서리치듯 싫어한다.";
+			detail.append(li6);
+		}
+		
+		let button = document.getElementsByTagName('button');
+
+		
+		function sendLinkCustom(tid) {
+		        Kakao.init("84f8eb91d05f08f92e038211d696b5fe");
+		        Kakao.Link.sendCustom({
+		            templateId: tid
+		        });
+		    }
+	</script>
+</body>
+</html>

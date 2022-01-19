@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나의 MBTI</title>
+<link rel="stylesheet" href="mbt.css" type="text/css">
+</head>
+<body>
+	<div id="bg"></div>
+	<div id="outer">
+		
+		<div id="procBar_container">
+			<div id="procBar"></div>
+		</div>
+		<div class="slide_wrap">
+			<div class="slide_list clearfix">
+				<div class="slide_content">
+					<div class="question">
+						<p>하루 일과로 알아보는</p>
+						<p><b>MBTI</b>유형은?</p>
+					</div>
+					<div class="answer">
+						<button onclick="slide()" style="width: 150px; height: 50px;">시작하기</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<P>상쾌한 주말 아침!</P>
+						<p>오늘 일어난 시간은?</P>
+					</div>
+					<div class="answer">
+						<button data-mbti="j">
+							주말이어도<br> 같은 시간에 일어나지
+						</button>
+						<button data-mbti="p">
+							주말엔 눈뜨는 시간이<br> 깨는 시간이지
+						</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<p>창문을 보니 하늘이</p>
+						<p>어둑어둑 하네</p>
+					</div>
+					<div class="answer">
+						<button data-mbti="s">
+							폰이나 tv로<br> 오후날씨를 확인한다
+						</button>
+						<button data-mbti="n">
+							오후엔 비가 오려나..<br> 하고 생각한다
+						</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<P>내가 주말에 주로 하는건?</P>
+					</div>
+					<div class="answer">
+						<button data-mbti="e">
+							야! 나와!<br> 친구들을 만난다
+						</button>
+						<button data-mbti="i">
+							이불밖은 위험해...<br> 집에서 취미생활을 한다
+						</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<p>오늘은 영어회화학원</p>
+						<p>주말반 첫 날 당신은?</p>
+					</div>
+					<div class="answer">
+						<button data-mbti="e">
+							다른 회원들과<br> 쉽게 친해진다
+						</button>
+						<button data-mbti="i">
+							하염없이<br> 스마트폰과 친해진다
+						</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<P>선생님의 칭찬!</P>
+						<p>더 기분좋은 멘트는?</p>
+					</div>
+					<div class="answer">
+						<button data-mbti="t">금방 배우시네요!</button>
+						<button data-mbti="f">정말 열심히 하셨네요</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<P>학원을 마친 후</P>
+						<p>마트에 가서</p>
+						<p>전단지를 보는데</p>
+					</div>
+					<div class="answer">
+						<button data-mbti="s">
+							제품과 가격을 <br> 꼼꼼히 살펴본다
+						</button>
+						<button data-mbti="n">
+							전체적으로 <br> 전단지를 둘러본다
+						</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<P>마트에서 동료직원을</P>
+						<p>마주친 당신</p>
+					</div>
+					<div class="answer">
+						<button data-mbti="e">
+							먼저 다가가서<br> 반갑게 이야기를 나눈다
+						</button>
+						<button data-mbti="i">
+							가볍게 인사하고<br> 내 갈길 간다
+						</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<P>마트를 둘러보던 중</P>
+						<p>동생이 필요하다고한</p>
+						<p>물건을 발견했다</p>
+					</div>
+					<div class="answer">
+						<button data-mbti="t">나의 기억력 역시 완벽</button>
+						<button data-mbti="f">동생 챙겨주다니 섬세해</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<P>필요한 물건은 다 샀고 이제?</P>
+					</div>
+					<div class="answer">
+						<button data-mbti="j">
+							다 샀으면 바로 <br> 집으로 가야지
+						</button>
+						<button data-mbti="p">
+							싼 물건이 많네 <br> 더 둘러보고 가야지
+						</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<P>갑자기 걸려온 친구의 전화</P>
+						<p>“나 이번시험 떨어졌다”</p>
+					</div>
+					<div class="answer">
+						<button data-mbti="t">
+							어떤과목이 문제였어?<br> 점수는?
+						</button>
+						<button data-mbti="f">
+							아깝겠다~! <br> 걱정마 다 잘될거야
+						</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<P>이번엔 친구가 물어본다</P>
+						<p>너는 오늘하루 어땠어?</p>
+					</div>
+					<div class="answer">
+						<button data-mbti="s">
+							오늘 있었던 일을 <br> 구체적으로 이야기
+						</button>
+						<button data-mbti="n">
+							큰사건 중심으로 <br> 간단명료하게 이야기
+						</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<div class="question">
+						<P>잠들기전</P>
+						<p>생각해보는 내일은?</p>
+					</div>
+					<div class="answer">
+						<button data-mbti="j">
+							계획과 실천! <br> 내일 일과를 계획
+						</button>
+						<button data-mbti="p">
+							내일이 어떻게 될지 알고? <br>내일 고민한다
+						</button>
+					</div>
+				</div>
+				<div class="slide_content">
+					<button onclick="location.href='result.html'">결과보기</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		const slideList = document.querySelector('.slide_list');
+		const slideContents = document.querySelectorAll('.slide_content');
+		const btn = document.querySelector('.btn');
+		const slideLen = slideContents.length;
+		const slideWidth = 360;
+		const slideSpeed = 300;
+		slideList.style.width = slideWidth * (slideLen) + "px";
+		const procBar = document.querySelector('#procBar');
+		const procBarContainer = document.querySelector('#procBar_container');
+		let index = 1;
+
+		const PROC = slideWidth / (slideLen - 1);
+		let procWidth = PROC;
+		const resultMsg = document.querySelector('#result');
+
+		let ei = 0;
+		let sn = 0;
+		let tf = 0;
+		let jp = 0;
+
+		let button = document.getElementsByTagName('button');
+		for (let i = 1; i < button.length - 1; i++) {
+			button[i].addEventListener('click', function(e) {
+				let mbti = event.target.getAttribute('data-mbti');
+				if (mbti == "e") {
+					ei++;
+				} else if (mbti == "i") {
+					ei--;
+				} else if (mbti == "s") {
+					sn++;
+				} else if (mbti == "n") {
+					sn--;
+				} else if (mbti == "t") {
+					tf++;
+				} else if (mbti == "f") {
+					tf--;
+				} else if (mbti == "j") {
+					jp++;
+				} else if (mbti == "p") {
+					jp--;
+				} else {
+					return;
+				}
+				dataAdd();
+				slide();
+			});
+		}
+
+		function dataAdd(){
+			localStorage.setItem('ei', ei);
+			localStorage.setItem('sn', sn);
+			localStorage.setItem('tf', tf);
+			localStorage.setItem('jp', jp);
+		}
+
+		function slide() {
+			slideList.style.transition = slideSpeed + "ms";
+			slideList.style.transform = "translate3d(-" + (slideWidth * index)
+					+ "px, 0px, 0px)";
+			procBar.style.width = procWidth + "px";
+			procBar.style.transition = 700 + "ms";
+			procWidth = procWidth + PROC;
+			index++;
+		}
+
+	</script>
+</body>
+
+</html>
